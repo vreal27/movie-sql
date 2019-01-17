@@ -77,7 +77,7 @@
 			<key>contentSortColIsAsc</key>
 			<true/>
 			<key>contentViewport</key>
-			<string>{{0, 3601.5}, {805, 498}}</string>
+			<string>{{0, 3694}, {805, 498}}</string>
 			<key>isToolbarVisible</key>
 			<true/>
 			<key>queries</key>
@@ -218,7 +218,7 @@ SELECT ratings.user_id, AVG(ratings.rating), COUNT(ratings.user_id)  FROM rating
 
 -- Find the movies with an average rating over 4
 
-SELECT movies.title, AVG(ratings.rating) FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE ratings.rating &gt; 4 GROUP BY movies.title; 
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title HAVING AVG(ratings.rating) &gt;= 4; 
 
 </string>
 			<key>table</key>
@@ -239,10 +239,40 @@ SELECT movies.title, AVG(ratings.rating) FROM movies LEFT JOIN ratings ON movies
 	<array>
 		<string>-- Find the movies with an average rating over 4
 
-SELECT movies.title, AVG(ratings.rating) FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE ratings.rating &gt; 4 GROUP BY movies.title</string>
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title HAVING AVG(ratings.rating) &gt;= 4</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title HAVING AVG(ratings.rating) = 4</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title ORDER BY  HAVING AVG(ratings.rating) = 4</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title ORDER BY  HAVING AVG(ratings.rating) = 4 top DESC LIMIT 10</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id GROUP BY movies.title ORDER BY  HAVING AVG(ratings.rating) &gt;= 4 top DESC LIMIT 10</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) AS top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE top &gt;= 4 GROUP BY movies.title ORDER BY top DESC LIMIT 10</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) as top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id  GROUP BY movies.title ORDER BY top DESC LIMIT 10</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) as top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id  GROUP BY movies.title</string>
 		<string>-- Find the user with the highest average rating with more than 50 reviews
 
 SELECT ratings.user_id, AVG(ratings.rating), COUNT(ratings.user_id)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY COUNT(ratings.user_id) DESC LIMIT 1</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) as top FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE top &gt; 4 GROUP BY movies.title</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE AVG(ratings.rating) &gt; 4 GROUP BY movies.title</string>
+		<string>-- Find the movies with an average rating over 4
+
+SELECT movies.title, AVG(ratings.rating) FROM movies LEFT JOIN ratings ON movies.id = ratings.movie_id WHERE ratings.rating &gt; 4 GROUP BY movies.title</string>
 		<string>-- Find the user with the highest average rating
 
 SELECT ratings.user_id, AVG(ratings.rating) AS top FROM ratings GROUP BY  ratings.user_id ORDER BY top DESC LIMIT 1</string>
@@ -267,34 +297,6 @@ SELECT ratings.user_id, AVG(ratings.rating), COUNT(ratings.rating)  FROM ratings
 		<string>-- Find the user with the highest average rating
 
 SELECT ratings.user_id, AVG(ratings.user_id) AS top FROM ratings GROUP BY  ratings.user_id ORDER BY top DESC LIMIT 1</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.ratings), COUNT(ratings.ratings)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY COUNT(ratings.user_id) DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id), COUNT(ratings.user_id)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY COUNT(ratings.user_id) DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id), COUNT(ratings.user_id)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY COUNT(ratings.user_id) DESC LIMIT 10</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id), COUNT(ratings.user_id)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY user_id DESC LIMIT 10</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id), COUNT(ratings.user_id)  FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY user_id DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id), COUNT(ratings.user_id) AS top FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY top DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id AS top FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY top DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id) AS top FROM ratings WHERE ratings.user_id &gt; 50 GROUP BY ratings.user_id ORDER BY top DESC LIMIT 3</string>
-		<string>-- Find the user with the highest average rating with more than 50 reviews
-
-SELECT ratings.user_id, AVG(ratings.user_id) AS top FROM ratings WHERE COUNT(ratings.user_id) &gt; 50 GROUP BY ratings.user_id ORDER BY top DESC LIMIT 3</string>
-		<string>(ratings.user_id) AS top FROM ratings WHERE ratings.rating &gt; 50 GROUP BY ratings</string>
 	</array>
 	<key>rdbms_type</key>
 	<string>mysql</string>
